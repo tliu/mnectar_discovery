@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     {
         //ImageView mainImage = (ImageView)findViewById(R.id.main_image);
         //mainImage.setImageURI(null);//URI for image should be provided by backend.
+        getActionBar().hide();
         LinearLayout layout = (LinearLayout) findViewById(R.id.category_list);
         for (Category c : categories)
         {
@@ -67,7 +68,7 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -89,6 +90,6 @@ public class MainActivity extends Activity {
         Game g = (Game)view.getTag();
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(getString(R.string.game), g);
-        //startActivity(intent);
+        startActivity(intent);
     }
 }
