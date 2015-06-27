@@ -14,12 +14,14 @@
             android:layout_height="200dp"
             android:src="@android:color/holo_blue_bright"
             app:layout_collapseMode="parallax"/>
+
         <TextView
             android:id="@+id/list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/game_categories"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:paddingStart="30dp" />
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
