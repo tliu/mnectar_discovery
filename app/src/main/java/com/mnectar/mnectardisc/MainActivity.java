@@ -103,6 +103,7 @@ public class MainActivity extends Activity {
         Game g = (Game)view.getTag();
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(getString(R.string.game), g);
+        intent.setAction("showGame");
         startActivity(intent);
     }
 }

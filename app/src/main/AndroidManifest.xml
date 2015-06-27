@@ -20,6 +20,24 @@
             android:name=".GameActivity"
             android:label="@string/title_activity_game"
             android:parentActivityName=".MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="192.168.1.222"
+                    android:port="8001"
+                    android:scheme="http"
+                    android:pathPrefix="/app"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="192.168.1.222"
+                    android:port="8001"
+                    android:scheme="http"
+                    android:pathPrefix="/info"/>
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mnectar.mnectardisc.MainActivity" />
