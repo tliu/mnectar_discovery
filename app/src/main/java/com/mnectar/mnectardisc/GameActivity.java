@@ -64,7 +64,6 @@ public class GameActivity extends Activity {
             @Override
             public void onResponse(Bitmap response) {
                 ((ImageView) view.findViewById(R.id.game_image)).setImageBitmap(response);
-                buildPage(view);
             }
         }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
             @Override
@@ -73,6 +72,7 @@ public class GameActivity extends Activity {
             }
         });
         queue.add(imageRequest);
+        buildPage(view);
     }
 
     private void buildPage(View view)
