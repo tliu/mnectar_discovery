@@ -2,15 +2,22 @@ package com.mnectar.mnectardisc;
 
 import android.app.Activity;
 import android.content.Context;
+
 import android.content.Intent;
+
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+
 import android.util.Log;
+
+import android.view.Display;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ShareActionProvider;
@@ -127,6 +134,14 @@ public class GameActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    private int getScale(){
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int width = display.getWidth();
+        Double val = new Double(width)/new Double(320.0);
+        val = val * 100d;
+        return val.intValue();
+    }
+
     public void launchStream(View view) {
         if (view.getClass() == DummyView.class) streamPath = (Uri) view.getTag() ;
         WebView stream = new WebView(this);
@@ -134,7 +149,9 @@ public class GameActivity extends Activity {
         //stream.addJavascriptInterface(StreamJavascriptInterpreter);
         stream.loadUrl(streamPath.toString());
         stream.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        //getActionBar().hide();
+        stream.setPadding(0,0,0,0);
+
+        stream.setInitialScale(getScale());
         setContentView(stream);
         CountDownTimer timer = new CountDownTimer(60000, 1000) {
             @Override
@@ -145,7 +162,6 @@ public class GameActivity extends Activity {
             @Override
             public void onFinish() {
                 preparePage();
-                //getActionBar().show();
             }
 
         };
