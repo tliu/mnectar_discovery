@@ -27,19 +27,23 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_game);
         game = (Game) getIntent().getExtras().get(getString(R.string.game));
+
+        //javascript debugging
+        WebView.setWebContentsDebuggingEnabled(true);
+
         preparePage();
 
 /*        game = (Game) getIntent().getExtras().get(getString(R.string.game));
         WebView webView = (WebView)findViewById(R.id.game_info);
         webView.loadData(game.getDescription(), "text/html",null);
         queue = RequestQueueSingleton.getInstance(this).getRequestQueue();
-        Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/0.webp").build();
+        Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/image.webp").build();
         ImageRequest imageRequest = new ImageRequest(imagePath.toString(), new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 ((ImageView) findViewById(R.id.game_image)).setImageBitmap(response);
             }
-        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
+        }, image, image, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 

@@ -36,6 +36,7 @@ public class GetCategoriesTask extends AsyncTask<Void, Void, List<Category>> {
     protected List<Category> doInBackground(Void... params) {
         List<Category> cats = new ArrayList<Category>();
         try {
+            Log.i("Url: ", "getting url");
             String json = URLUtil.getJSONFromURL("/game/categories");
             JSONObject categories = new JSONObject(json);
             Log.i("fuck", String.valueOf(categories.getJSONArray("Role Playing")));

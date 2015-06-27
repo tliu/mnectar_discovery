@@ -2,8 +2,6 @@ package com.mnectar.mnectardisc;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.DrawableContainer;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -19,9 +17,6 @@ import android.widget.TextView;
 import com.mnectar.mnectardisc.backend.GetCategoriesTask;
 import com.mnectar.mnectardisc.backend.URLUtil;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 
