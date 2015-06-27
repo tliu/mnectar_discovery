@@ -10,17 +10,27 @@
         android:id="@+id/card_view"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        card_view:cardBackgroundColor="@android:color/holo_orange_light"
+        tools:cardBackgroundColor="@android:color/holo_orange_light"
         card_view:cardCornerRadius="6dp"
-        card_view:cardElevation="10dp"
-        card_view:contentPadding="10dp"
+        card_view:cardElevation="100.0dp"
         android:onClick="displayGame">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:id="@+id/game_title"/>
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.android.volley.toolbox.NetworkImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/card_image"
+                android:src="@drawable/logo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="10dp"
+                android:id="@+id/game_title"
+                android:background="@android:color/holo_red_light" />
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>

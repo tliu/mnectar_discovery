@@ -25,7 +25,8 @@
         android:orientation="horizontal"
         android:paddingStart="10dp"
         tools:include="@id/">
-        <include tools:layout="@layout/game_card"></include>
+        <include tools:layout="@layout/game_card"
+            layout="@layout/game_card"></include>
         </LinearLayout>
 </HorizontalScrollView>
 </RelativeLayout>

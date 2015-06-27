@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Network;
+import com.android.volley.toolbox.NetworkImageView;
 import com.mnectar.mnectardisc.backend.GetCategoriesTask;
 import com.mnectar.mnectardisc.backend.URLUtil;
 
@@ -60,10 +62,10 @@ public class MainActivity extends Activity {
         {
             RelativeLayout layout = (RelativeLayout) getLayoutInflater().inflate(R.layout.game_card, games, false);
             CardView cv = (CardView) layout.findViewById(R.id.card_view);
-            Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+g.getId()+"/logo.webp").build();
+            Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+g.getId()+"/logo.png").build();
             Log.d("URI: ", imagePath.toString());
-            ImageView imageView = new ImageView(this);//ImageView)cv.findViewById(R.id.card_image);
-            imageView.setTag(cv);
+            NetworkImageView imageView = (NetworkImageView) layout.findViewById(R.id.card_image);//ImageView)cv.findViewById(R.id.card_image);
+            //imageView.setTag(cv);
             ImageDownloader imageDownloader = new ImageDownloader(imageView);
             imageDownloader.execute(imagePath);
             TextView name = (TextView) layout.findViewById(R.id.game_title);

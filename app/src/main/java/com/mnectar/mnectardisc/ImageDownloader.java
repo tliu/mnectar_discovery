@@ -7,10 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.volley.Network;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.io.IOException;
 
@@ -18,7 +21,7 @@ import java.io.IOException;
  * Created by ian on 6/26/15.
  */
 public class ImageDownloader extends AsyncTask<Uri, Void, Void > {
-    private ImageView imageView;
+    private NetworkImageView imageView;
     private RequestQueue queue;
     @Override
     protected void onPostExecute(Void aVoid) {
@@ -30,7 +33,7 @@ public class ImageDownloader extends AsyncTask<Uri, Void, Void > {
         super.onPreExecute();
     }
 
-    public ImageDownloader(ImageView imageView) {
+    public ImageDownloader(NetworkImageView imageView) {
         super();
         this.imageView = imageView;
         queue=RequestQueueSingleton.getInstance(imageView.getContext().getApplicationContext()).getRequestQueue();
@@ -39,6 +42,9 @@ public class ImageDownloader extends AsyncTask<Uri, Void, Void > {
     @Override
     protected Void doInBackground(Uri... params) {
         Log.d("Uri: ", params[0].toString());
+        ImageLoader loader= RequestQueueSingleton.getInstance(imageView.getContext()).getImageLoader();
+        imageView.setImageUrl(params[0].toString(),loader);
+        /*
         ImageRequest imageRequest = new ImageRequest(params[0].toString(), new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
@@ -51,6 +57,7 @@ public class ImageDownloader extends AsyncTask<Uri, Void, Void > {
             }
         });
         queue.add(imageRequest);
+        */
         return null;
     }
 }

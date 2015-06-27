@@ -9,7 +9,7 @@
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:id="@+id/game_image"
             android:contentDescription="@string/game_image_desc"
             android:background="@android:color/holo_purple"
