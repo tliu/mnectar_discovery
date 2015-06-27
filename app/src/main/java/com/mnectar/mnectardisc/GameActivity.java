@@ -1,13 +1,16 @@
 package com.mnectar.mnectardisc;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
@@ -57,7 +60,7 @@ public class GameActivity extends Activity {
     {
         final View view = getLayoutInflater().inflate(R.layout.activity_game, null);
         WebView webView = (WebView)view.findViewById(R.id.game_info);
-        webView.loadData(game.getDescription(), "text/html",null);
+        webView.loadData(game.getDescription(), "text/html", null);
         queue = RequestQueueSingleton.getInstance(this).getRequestQueue();
         Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/0.webp").build();
         ImageRequest imageRequest = new ImageRequest(imagePath.toString(), new Response.Listener<Bitmap>() {
@@ -102,6 +105,14 @@ public class GameActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    private int getScale(){
+        Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int width = display.getWidth();
+        Double val = new Double(width)/new Double(320.0);
+        val = val * 100d;
+        return val.intValue();
+    }
+
     public void launchStream(View view) {
         Uri streamPath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.STREAM_PORT).appendEncodedPath("app/"+game.getId()+"/launch").build();
         WebView stream = new WebView(this);
@@ -109,6 +120,9 @@ public class GameActivity extends Activity {
         //stream.addJavascriptInterface(StreamJavascriptInterpreter);
         stream.loadUrl(streamPath.toString());
         stream.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        stream.setPadding(0,0,0,0);
+
+        stream.setInitialScale(getScale());
         getActionBar().hide();
         setContentView(stream);
         CountDownTimer timer = new CountDownTimer(60000, 1000) {
