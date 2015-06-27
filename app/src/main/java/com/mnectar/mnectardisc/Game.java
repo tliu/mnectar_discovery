@@ -39,6 +39,14 @@ public class Game implements Serializable{
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public Uri getLink() {
+        return link;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

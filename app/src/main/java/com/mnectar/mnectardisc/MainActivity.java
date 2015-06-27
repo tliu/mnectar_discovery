@@ -2,16 +2,25 @@ package com.mnectar.mnectardisc;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.DrawableContainer;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mnectar.mnectardisc.backend.GetCategoriesTask;
+import com.mnectar.mnectardisc.backend.URLUtil;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,11 +63,18 @@ public class MainActivity extends Activity {
     {
         for (Game g: c.getGames())
         {
-            RelativeLayout cv = (RelativeLayout) getLayoutInflater().inflate(R.layout.game_card, games, false);
-            TextView name = (TextView) cv.findViewById(R.id.game_title);
+            RelativeLayout layout = (RelativeLayout) getLayoutInflater().inflate(R.layout.game_card, games, false);
+            CardView cv = (CardView) layout.findViewById(R.id.card_view);
+            Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+g.getId()+"/logo.webp").build();
+            Log.d("URI: ", imagePath.toString());
+            ImageView imageView = new ImageView(this);//ImageView)cv.findViewById(R.id.card_image);
+            imageView.setTag(cv);
+            ImageDownloader imageDownloader = new ImageDownloader(imageView);
+            imageDownloader.execute(imagePath);
+            TextView name = (TextView) layout.findViewById(R.id.game_title);
             name.setText(g.getName());
             cv.setTag(g);
-            games.addView(cv);
+            games.addView(layout);
         }
     }
 

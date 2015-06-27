@@ -41,18 +41,21 @@ public class GetCategoriesTask extends AsyncTask<Void, Void, List<Category>> {
             Log.i("fuck", String.valueOf(categories.getJSONArray("Role Playing")));
             Iterator<String> iter = categories.keys();
             while (iter.hasNext()) {
+
                 Category cat = new Category(iter.next());
-                JSONArray games = categories.getJSONArray(cat.getName());
-                for (int i = 0; i < games.length(); i++) {
-                    JSONObject jsonGame = games.getJSONObject(i);
-                    Game game = new Game(jsonGame.getString("name"),
-                                         jsonGame.getString("id"),
-                                         jsonGame.getString("package"),
-                                         Float.parseFloat(jsonGame.getString("rating")),
-                                         jsonGame.getString("description"));
-                    cat.addGame(game);
+                if (cat.getName()!="") {
+                    JSONArray games = categories.getJSONArray(cat.getName());
+                    for (int i = 0; i < games.length(); i++) {
+                        JSONObject jsonGame = games.getJSONObject(i);
+                        Game game = new Game(jsonGame.getString("name"),
+                                jsonGame.getString("id"),
+                                jsonGame.getString("package"),
+                                Float.parseFloat(jsonGame.getString("rating")),
+                                jsonGame.getString("description"));
+                        cat.addGame(game);
+                    }
+                    cats.add(cat);
                 }
-                cats.add(cat);
 
             }
         } catch (IOException | JSONException e) {

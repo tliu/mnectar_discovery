@@ -12,7 +12,8 @@
             android:layout_height="300dp"
             android:id="@+id/game_image"
             android:contentDescription="@string/game_image_desc"
-            android:background="@android:color/holo_purple"/>
+            android:background="@android:color/holo_purple"
+            android:onClick="launchStream"/>
         <WebView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
