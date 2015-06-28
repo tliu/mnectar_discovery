@@ -86,6 +86,9 @@ public class RewardsActivity extends Activity {
 
     }
 
+
+
+
     public void launchPandora(View view) {
         //intent to launch pandora or get it from the app store
         Intent intent;

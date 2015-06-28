@@ -14,8 +14,8 @@
             android:layout_height="30dp"
             android:id="@+id/coins">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/coin_image"
                 android:layout_alignParentEnd="true"
                 android:scaleType="fitCenter"
@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/coin_count_rewards"
                 android:textSize="24sp"
+
                 android:layout_toStartOf="@id/coin_image" />
         </RelativeLayout>
         <LinearLayout
@@ -57,12 +58,19 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@id/spotify_reward_name"
                     android:layout_alignParentEnd="true"
-                    android:background="@android:color/holo_blue_bright">
+                    android:background="#ccfd7201">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/spotify_reward_cost"
                         android:text="@string/spotify_cost"
+                        android:textColor="#fff"
+                        android:gravity="center_horizontal"
+                        android:shadowColor="#000"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="1"
+
                         android:textSize="24sp"/>
                     <ImageView
                         android:layout_width="24dp"
@@ -95,12 +103,19 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@id/reward_name"
                     android:layout_alignParentEnd="true"
-                    android:background="@android:color/holo_blue_bright">
+                    android:background="#ccfd7201">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/reward_cost"
                         android:textSize="24sp"
+                            android:textColor="#fff"
+                    android:gravity="center_horizontal"
+                    android:shadowColor="#000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+
                         android:text="@string/pandora_cost"/>
                     <ImageView
                         android:layout_width="24dp"

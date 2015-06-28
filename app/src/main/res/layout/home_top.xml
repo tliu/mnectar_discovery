@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:id="@+id/main_layout"
+    android:layout_height="224dp"
+    android:onClick="displayGame">
+    <ImageView
+        android:id="@+id/main_image"
+        android:layout_width="wrap_content"
+        android:src="@drawable/main37"
+        android:layout_height="224dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:padding="4dp"
+        android:textSize="24sp"
+        android:id="@+id/featured_title"
+        android:text="Featured Game!"
+        android:textColor="#fff"
+        android:gravity="center_horizontal"
+        android:shadowColor="#000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:background="#ccfd7201" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/coins"
+        android:layout_alignParentTop="true">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/coin_image"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitCenter"
+            android:paddingBottom="3dp"
+            android:src="@drawable/coin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/coin_count"
+            android:textSize="24sp"
+            android:paddingRight="14dp"
+            android:paddingTop="8dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="#fff"
+            android:shadowColor="#000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="15"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -34,4 +34,5 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.google.android.gms:play-services:7.5+'
     compile(name: 'library-release', ext:'aar')
+    compile 'com.github.nirhart:parallaxscroll:1.0'
 }

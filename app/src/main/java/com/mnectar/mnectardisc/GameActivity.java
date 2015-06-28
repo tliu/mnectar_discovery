@@ -62,6 +62,7 @@ public class GameActivity extends Activity {
         String action = intent.getAction();
         user = User.getUser();
         if (action.equals(Intent.ACTION_VIEW)) {
+            getActionBar().hide();
             Uri uri = intent.getData();
             String id = uri.getPath();
             Log.d("Uri path: ",id);
@@ -77,32 +78,10 @@ public class GameActivity extends Activity {
         else {
             game = (Game) intent.getExtras().get(getString(R.string.game));
 
-
+            getActionBar().setTitle(game.getName());
             preparePage();
 
-            FadingActionBarHelper helper = new FadingActionBarHelper()
-                    .actionBarBackground(R.drawable.ab_background)
-                    .headerLayout(R.layout.header_light)
-                    .contentLayout(R.layout.activity_scrollview)
-                    .allowHeaderTouchEvents(true);
-            setContentView(helper.createView(this));
-            helper.initActionBar(this);
 
-            ImageView imageView = (ImageView)findViewById(R.id.image_logo);
-            imageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/logo" + game.getId(), null, null)));
-
-            TextView textView = (TextView)findViewById(R.id.details_title);
-            textView.setText(game.getName());
-
-            WebView webView = (WebView) findViewById(R.id.webView);
-            webView.getSettings().setStandardFontFamily("Georgia");
-            webView.getSettings().setSerifFontFamily("Georgia");
-            webView.getSettings().setSansSerifFontFamily("Georgia");
-            webView.setWebViewClient(new WebViewClient());
-            webView.loadData(game.getDescription(), "text/html", null);
-
-            ImageView i = (ImageView) findViewById(R.id.image_header);
-            i.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/main" + game.getId(), null, null)));
 
             /*
             Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/main.webp").build();
@@ -146,7 +125,29 @@ public class GameActivity extends Activity {
         //WebView webView = (WebView)findViewById(R.id.game_info);
         //webView.loadData(game.getDescription(), "text/html", null);
         streamPath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.STREAM_PORT).appendEncodedPath("app/"+game.getId()+"/launch").build();
+            FadingActionBarHelper helper = new FadingActionBarHelper()
+                    .actionBarBackground(R.drawable.ab_background)
+                    .headerLayout(R.layout.header_light)
+                    .contentLayout(R.layout.activity_scrollview)
+                    .allowHeaderTouchEvents(true);
+            setContentView(helper.createView(this));
+            helper.initActionBar(this);
 
+            ImageView imageView = (ImageView)findViewById(R.id.image_logo);
+            imageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/logo" + game.getId(), null, null)));
+
+            TextView textView = (TextView)findViewById(R.id.details_title);
+            textView.setText(game.getName());
+
+            WebView webView = (WebView) findViewById(R.id.webView);
+            webView.getSettings().setStandardFontFamily("Georgia");
+            webView.getSettings().setSerifFontFamily("Georgia");
+            webView.getSettings().setSansSerifFontFamily("Georgia");
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadData(game.getDescription(), "text/html", null);
+
+            ImageView i = (ImageView) findViewById(R.id.image_header);
+            i.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/main" + game.getId(), null, null)));
 
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
@@ -203,6 +204,7 @@ public class GameActivity extends Activity {
     }
 
     public void launchStream(View view) {
+        getActionBar().hide();
         if (view.getClass() == DummyView.class) streamPath = (Uri) view.getTag() ;
         WebView stream = new WebView(this);
         stream.getSettings().setJavaScriptEnabled(true);
@@ -213,7 +215,7 @@ public class GameActivity extends Activity {
 
         stream.setInitialScale(getScale());
         setContentView(stream);
-        CountDownTimer timer = new CountDownTimer(60000, 1000) {
+        CountDownTimer timer = new CountDownTimer(20000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
@@ -223,12 +225,20 @@ public class GameActivity extends Activity {
             public void onFinish() {
                 user.addCoins(game.getCoins());
                 preparePage();
+
             }
 
         };
         timer.start();
     }
+    public void launchPlayStore(View view) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + game.getPackageName())));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + game.getPackageName())));
+        }
 
+    }
     private void setShareActionProvider(Intent intent)
     {
         if (shareActionProvider!= null)

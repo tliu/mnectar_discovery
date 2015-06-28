@@ -28,6 +28,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
+import com.mnectar.mnectardisc.backend.URLUtil;
 
 public class MNectarGcmListenerService extends GcmListenerService {
 
@@ -44,24 +45,26 @@ public class MNectarGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
+        String id = data.getString("id");
         Log.d("MNECTAR", "From: " + from);
         Log.d("MNECTAR", "Message: " + message);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.common_signin_btn_icon_dark)
-                        .setContentTitle(from)
+                        .setSmallIcon(R.drawable.paw_of_legend_app_icon)
+                        .setContentTitle("Appable")
                         .setContentText(message);
 // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(this, MainActivity.class);
-
+        Intent resultIntent = new Intent(this, GameActivity.class);
+        Uri streamPath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.STREAM_PORT).appendEncodedPath("app/"+id+"/launch").build();
+        resultIntent.setData(streamPath);
 // The stack builder object will contain an artificial back stack for the
 // started Activity.
 // This ensures that navigating backward from the Activity leads out of
 // your application to the Home screen.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addParentStack(GameActivity.class);
 // Adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent =

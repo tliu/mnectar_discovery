@@ -58,6 +58,7 @@
                 android:text="Install"
                 android:textColor="#fff"
                 android:textAppearance="@android:style/TextAppearance.Holo.Widget.Button"
+                android:onClick="launchPlayStore"
                 android:background="#b4c837"/>
 
         </LinearLayout>
