@@ -38,11 +38,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/spotify_reward_cost"
-                    android:text="@string/spotify_cost"/>
+                    android:text="@string/spotify_cost"
+                    android:textSize="24sp"/>
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="coin image"/>
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="coin image"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/coin"/>
             </LinearLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -73,11 +76,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/reward_cost"
+                    android:textSize="24sp"
                     android:text="@string/pandora_cost"/>
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="coin image"/>
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="coin image"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/coin"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
     {
         //ImageView mainImage = (ImageView)findViewById(R.id.main_image);
         //mainImage.setImageURI(null);//URI for image should be provided by backend.
-        getActionBar().hide();
+        if (getActionBar()!=null)getActionBar().hide();
         LinearLayout layout = (LinearLayout) findViewById(R.id.category_list);
         for (Category c : categories)
         {
@@ -126,6 +126,7 @@ public class MainActivity extends Activity {
             layout.addView(categoryLayout);
 
         }
+        ((RelativeLayout)layout.getChildAt(layout.getChildCount()-1)).removeView(findViewById(R.id.divider));
     }
 
     private void populateList(Category c, LinearLayout games)

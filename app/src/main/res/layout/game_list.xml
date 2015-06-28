@@ -10,11 +10,15 @@
         android:layout_alignParentTop="true"
         android:id="@+id/category_title"
         android:autoText="false"
+        android:textSize="24sp"
+        android:paddingBottom="16sp"
+        android:paddingTop="16sp"
+        android:paddingStart="30sp"
         android:text="Default Category"
         android:singleLine="false" />
 <HorizontalScrollView
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     android:id="@+id/game_list_container"
     android:layout_below="@id/category_title"
     android:layout_alignParentBottom="true">
@@ -29,4 +33,10 @@
             layout="@layout/game_card"></include>
         </LinearLayout>
 </HorizontalScrollView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:src="@android:color/holo_green_dark"
+        android:id="@+id/divider"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
