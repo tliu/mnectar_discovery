@@ -165,8 +165,8 @@ public class GameActivity extends Activity {
 
             @Override
             public void onFinish() {
-                preparePage();
                 user.addCoins(game.getCoins());
+                preparePage();
             }
 
         };
