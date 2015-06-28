@@ -112,6 +112,7 @@ public class MainActivity extends Activity {
         //mainImage.setImageURI(null);//URI for image should be provided by backend.
         if (getActionBar()!=null)getActionBar().hide();
         LinearLayout layout = (LinearLayout) findViewById(R.id.category_list);
+        boolean changeToBlue =false;
         for (Category c : categories)
         {
             RelativeLayout categoryLayout = (RelativeLayout) getLayoutInflater().inflate(R.layout.game_list, layout, false);
@@ -120,6 +121,11 @@ public class MainActivity extends Activity {
             LinearLayout games = (LinearLayout) categoryLayout.findViewById(R.id.game_list);
             games.removeAllViews();
             populateList(c, games);
+            if (changeToBlue)
+            {
+                categoryLayout.findViewById(R.id.title_bar).setBackgroundColor(getResources().getColor(17170450)); //
+            }
+            changeToBlue=!changeToBlue;
             layout.addView(categoryLayout);
 
         }
