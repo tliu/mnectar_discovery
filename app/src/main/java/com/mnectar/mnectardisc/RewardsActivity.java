@@ -95,7 +95,7 @@ public class RewardsActivity extends Activity {
         intent = packageManager.getLaunchIntentForPackage("com.pandora.android");
         if (intent!=null)
         {
-            if (user.getCoins()>=10) {
+            if (user.getCoins()>=100) {
                 //do something to make sure the reward is activated
                 user.removeCoins(100);
                 ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
