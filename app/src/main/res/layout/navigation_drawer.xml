@@ -29,9 +29,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/reward_icon"
                 android:id="@+id/reward_icon"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"
+                android:onClick="goToRewards"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,9 +48,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/main_page_icon"
                 android:id="@+id/main_page_icon"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"
+                android:onClick="goToMain"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,9 +67,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/features_icon"
                 android:id="@+id/settings_icon"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"
+                android:onClick="goToSettings"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

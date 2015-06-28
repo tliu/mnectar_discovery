@@ -178,4 +178,16 @@ public class MainActivity extends Activity {
         intent.setAction("showGame");
         startActivity(intent);
     }
+
+    public void goToSettings(View view) {
+
+    }
+
+    public void goToMain(View view) {
+    }
+
+    public void goToRewards(View view) {
+        Intent intent = new Intent(this,RewardsActivity.class);
+        startActivity(intent);
+    }
 }

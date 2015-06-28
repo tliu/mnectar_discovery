@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mnectar.mnectardisc" >
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="com.mnectar.mnectardisc.permission.C2D_MESSAGE"
+    <permission
+        android:name="com.mnectar.mnectardisc.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.mnectar.mnectardisc.permission.C2D_MESSAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,23 +31,30 @@
             android:label="@string/title_activity_game"
             android:parentActivityName=".MainActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:host="192.168.1.222"
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="192.168.1.222"
+                    android:pathPrefix="/app"
                     android:port="8001"
-                    android:scheme="http"
-                    android:pathPrefix="/app"/>
+                    android:scheme="http" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:host="192.168.1.222"
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="192.168.1.222"
+                    android:pathPrefix="/info"
                     android:port="8001"
-                    android:scheme="http"
-                    android:pathPrefix="/info"/>
+                    android:scheme="http" />
             </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mnectar.mnectardisc.MainActivity" />
@@ -55,31 +66,39 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.mnectar.mnectardisc" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name="com.mnectar.mnectardisc.MNectarGcmListenerService"
+            android:name=".MNectarGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
-            android:name="com.mnectar.mnectardisc.MNectarInstanceIDListenerService"
-            android:exported="false">
+            android:name=".MNectarInstanceIDListenerService"
+            android:exported="false" >
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-
         <service
-            android:name="com.mnectar.mnectardisc.RegistrationIntentService"
+            android:name=".RegistrationIntentService"
             android:exported="false" >
         </service>
 
+        <activity
+            android:name=".RewardsActivity"
+            android:label="@string/title_activity_rewards"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mnectar.mnectardisc.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

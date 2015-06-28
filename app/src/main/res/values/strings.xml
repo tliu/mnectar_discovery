@@ -7,4 +7,7 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="game_image_desc">Game Image</string>
     <string name="game">game</string>
+    <string name="title_activity_rewards">Rewards</string>
+    <string name="spotify_cost">100</string>
+    <string name="pandora_cost">100</string>
 </resources>
