@@ -18,9 +18,14 @@ public class User {
         return coins;
     }
 
-    public void setCoins(int coins) {
-        this.coins = coins;
+    public void addCoins(int coins) {
+        this.coins += coins;
     }
+
+    public void removeCoins(int coins) {
+        this.coins -= coins;
+    }
+
 
     public String getName() {
         return name;
@@ -29,6 +34,7 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
 
     private User()
     {

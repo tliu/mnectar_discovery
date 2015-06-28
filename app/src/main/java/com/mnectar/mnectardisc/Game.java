@@ -16,6 +16,7 @@ public class Game implements Serializable{
     private float rating;
     private String description;
     private Uri link;
+    private int coins;
 
     public Game(String name, String id, Uri link) {
         this.name = name;
@@ -53,6 +54,14 @@ public class Game implements Serializable{
 
     public String getPackageName() {
         return packageName;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 
     public void setPackageName(String packageName) {

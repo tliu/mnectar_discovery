@@ -78,7 +78,7 @@ public class GameActivity extends Activity {
         WebView webView = (WebView)view.findViewById(R.id.game_info);
         webView.loadData(game.getDescription(), "text/html", null);
         queue = RequestQueueSingleton.getInstance(this).getRequestQueue();
-        Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/0.webp").build();
+        Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/main.webp").build();
         streamPath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.STREAM_PORT).appendEncodedPath("app/"+game.getId()+"/launch").build();
         ImageRequest imageRequest = new ImageRequest(imagePath.toString(), new Response.Listener<Bitmap>() {
             @Override
@@ -164,6 +164,7 @@ public class GameActivity extends Activity {
             @Override
             public void onFinish() {
                 preparePage();
+                user.addCoins(game.getCoins());
             }
 
         };
