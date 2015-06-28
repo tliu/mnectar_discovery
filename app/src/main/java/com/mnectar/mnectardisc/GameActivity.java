@@ -52,7 +52,7 @@ public class GameActivity extends Activity {
             Uri uri = intent.getData();
             String id = uri.getPath();
             Log.d("Uri path: ",id);
-            id = id.substring(5,id.length()-6);
+            id = id.substring(5,id.length()-7);
             Log.d("Uri path: ", id);
             new GetGameTask(this).execute(id);
             DummyView dummyView = new DummyView(this);

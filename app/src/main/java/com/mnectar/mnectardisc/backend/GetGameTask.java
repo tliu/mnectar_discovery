@@ -39,7 +39,7 @@ public class GetGameTask extends AsyncTask<String, Void, Game> {
         try {
             Log.i("Url: ", "getting "+params[0]);
             String json = URLUtil.getJSONFromURL("/game/"+params[0]);
-            JSONObject jsonGame = new JSONObject(json);
+            JSONObject jsonGame = new JSONArray(json).getJSONObject(0);
             game = new Game(jsonGame.getString("name"),
                     jsonGame.getString("id"),
                     jsonGame.getString("package"),
