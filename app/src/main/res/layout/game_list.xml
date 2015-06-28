@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#FFFFFFFF"
     android:id="@+id/category_container">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_dark"
+        android:background="#E0E0E0"
         android:id="@+id/title_bar">
         <TextView
             android:layout_width="wrap_content"
@@ -15,10 +16,11 @@
             android:layout_alignParentTop="true"
             android:id="@+id/category_title"
             android:autoText="false"
-            android:textSize="24sp"
+            android:textSize="28sp"
+            android:textStyle="bold"
             android:paddingBottom="16sp"
             android:paddingTop="16sp"
-            android:paddingStart="30sp"
+            android:paddingStart="14sp"
             android:text="Default Category"
             android:singleLine="false" />
     </LinearLayout>

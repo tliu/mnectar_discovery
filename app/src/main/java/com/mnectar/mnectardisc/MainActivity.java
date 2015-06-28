@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.CardView;
@@ -15,23 +17,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mnectar.mnectardisc.backend.GetCategoriesTask;
 import com.mnectar.mnectardisc.backend.URLUtil;
+import com.nirhart.parallaxscroll.views.ParallaxListView;
 
 import java.util.List;
+import java.util.Random;
+import java.util.logging.Handler;
 
 
 public class MainActivity extends Activity {
 
     List<Category> categories;
     private User user;
+    private ParallaxListView plv;
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
@@ -40,6 +48,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        plv = (ParallaxListView) findViewById(R.id.list_view);
+//        CustomListAdapter
         new GetCategoriesTask(this).execute();
         user = User.getUser();
         ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
@@ -110,25 +120,43 @@ public class MainActivity extends Activity {
     {
         //ImageView mainImage = (ImageView)findViewById(R.id.main_image);
         //mainImage.setImageURI(null);//URI for image should be provided by backend.
-        if (getActionBar()!=null)getActionBar().hide();
-        LinearLayout layout = (LinearLayout) findViewById(R.id.category_list);
-        boolean changeToBlue =false;
+        getActionBar().setTitle("Appable");
+
+
+
+        Random r = new Random();
+        Category c = categories.get(r.nextInt(categories.size()));
+        Game g = c.getGames().get(r.nextInt(c.getGames().size()));
+        RelativeLayout topthing=(RelativeLayout)getLayoutInflater().inflate(R.layout.home_top, plv, false);
+        topthing.setTag(g);
+        ImageView img = (ImageView)topthing.findViewById(R.id.main_image);
+        img.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/main" + g.getId(), null, null)));
+        TextView tv = (TextView)topthing.findViewById(R.id.featured_title);
+        tv.setText(g.getName());
+
+
+        plv.addParallaxedHeaderView(topthing);
+        plv.setAdapter(new CategoryListAdapter(categories, getLayoutInflater(), getResources(), plv));
+        /*
         for (Category c : categories)
         {
-            RelativeLayout categoryLayout = (RelativeLayout) getLayoutInflater().inflate(R.layout.game_list, layout, false);
+            RelativeLayout categoryLayout =(RelativeLayout) getLayoutInflater().inflate(R.layout.game_list, plv, false);
             TextView title= (TextView) categoryLayout.findViewById(R.id.category_title);
             title.setText(c.getName());
             LinearLayout games = (LinearLayout) categoryLayout.findViewById(R.id.game_list);
+            Random r = new Random();
+            Game g = c.getGames().get(r.nextInt(c.getGames().size()));
+            LinearLayout topthing=(LinearLayout)getLayoutInflater().inflate(R.layout.home_top, plv, false);
+            ImageView img = (ImageView)topthing.findViewById(R.id.main_image);
+            img.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/main" + g.getId(), null, null)));
+
             games.removeAllViews();
             populateList(c, games);
-            if (changeToBlue)
-            {
-                categoryLayout.findViewById(R.id.title_bar).setBackgroundColor(getResources().getColor(17170450)); //
-            }
-            changeToBlue=!changeToBlue;
-            layout.addView(categoryLayout);
+            plv.addView(topthing);
+            plv.addView(categoryLayout);
 
         }
+        */
     }
 
     private void populateList(Category c, LinearLayout games)
@@ -137,12 +165,16 @@ public class MainActivity extends Activity {
         {
             RelativeLayout layout = (RelativeLayout) getLayoutInflater().inflate(R.layout.game_card, games, false);
             CardView cv = (CardView) layout.findViewById(R.id.card_view);
-            Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+g.getId()+"/logo.png").build();
-            Log.d("URI: ", imagePath.toString());
-            NetworkImageView imageView = (NetworkImageView) layout.findViewById(R.id.card_image);//ImageView)cv.findViewById(R.id.card_image);
+            final ImageView imageView = (ImageView) layout.findViewById(R.id.card_image);//ImageView)cv.findViewById(R.id.card_image);
+            final String id = g.getId();
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    imageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("logo" + id, "drawable", getPackageName())));
+                }
+            };
+            thread.start();
             //imageView.setTag(cv);
-            ImageDownloader imageDownloader = new ImageDownloader(imageView);
-            imageDownloader.execute(imagePath);
             TextView name = (TextView) layout.findViewById(R.id.game_title);
             name.setText(g.getName());
             cv.setTag(g);
