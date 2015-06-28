@@ -27,6 +27,7 @@ public class RewardsActivity extends Activity {
         setContentView(R.layout.activity_rewards);
         user = User.getUser();
         ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
+        ((TextView)findViewById(R.id.coin_count_rewards)).setText(String.valueOf(user.getCoins()));
     }
 
     @Override
@@ -64,6 +65,8 @@ public class RewardsActivity extends Activity {
             if (user.getCoins()>=100) {
                 //do something to make sure the reward is activated
                 user.removeCoins(100);
+                ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
+                ((TextView)findViewById(R.id.coin_count_rewards)).setText(String.valueOf(user.getCoins()));
                 startActivity(intent);
             }
             else
@@ -92,9 +95,11 @@ public class RewardsActivity extends Activity {
         intent = packageManager.getLaunchIntentForPackage("com.pandora.android");
         if (intent!=null)
         {
-            if (user.getCoins()>=100) {
+            if (user.getCoins()>=10) {
                 //do something to make sure the reward is activated
                 user.removeCoins(100);
+                ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
+                ((TextView)findViewById(R.id.coin_count_rewards)).setText(String.valueOf(user.getCoins()));
                 startActivity(intent);
             }
             else
