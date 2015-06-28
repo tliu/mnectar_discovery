@@ -126,7 +126,6 @@ public class MainActivity extends Activity {
             layout.addView(categoryLayout);
 
         }
-        ((RelativeLayout)layout.getChildAt(layout.getChildCount()-1)).removeView(findViewById(R.id.divider));
     }
 
     private void populateList(Category c, LinearLayout games)

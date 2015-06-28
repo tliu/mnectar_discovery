@@ -33,10 +33,4 @@
             layout="@layout/game_card"></include>
         </LinearLayout>
 </HorizontalScrollView>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:src="@android:color/holo_green_dark"
-        android:id="@+id/divider"
-        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
