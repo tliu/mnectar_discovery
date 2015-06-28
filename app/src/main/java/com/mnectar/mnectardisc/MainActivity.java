@@ -59,11 +59,8 @@ public class MainActivity extends Activity {
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
-            Log.i("MNECTAR", "got it");
             Intent intent = new Intent(this, RegistrationIntentService.class);
-            Log.i("MNECTAR", "got it2");
             startService(intent);
-            Log.i("MNECTAR", "got it3");
         }
 
 

@@ -6,27 +6,35 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
+import android.os.SystemClock;
 import android.util.Log;
 
 import android.view.Display;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.NetworkImageView;
+import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
 import com.mnectar.mnectardisc.backend.GetGameTask;
 import com.mnectar.mnectardisc.backend.URLUtil;
 
@@ -38,6 +46,7 @@ public class GameActivity extends Activity {
     private Uri streamPath;
     private User user;
 
+    private Drawable mActionBarBackgroundDrawable;
     public void setGame(Game game) {
         this.game = game;
     }
@@ -69,48 +78,86 @@ public class GameActivity extends Activity {
 
 
             preparePage();
+
+            FadingActionBarHelper helper = new FadingActionBarHelper()
+                    .actionBarBackground(R.drawable.ab_background)
+                    .headerLayout(R.layout.header_light)
+                    .contentLayout(R.layout.activity_scrollview);
+            setContentView(helper.createView(this));
+            helper.initActionBar(this);
+
+            ImageView imageView = (ImageView)findViewById(R.id.image_header);
+            Log.i("HEIGHT", ""+imageView.getHeight());
+
+            WebView webView = (WebView) findViewById(R.id.webView);
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadData(game.getDescription(), "text/html", null);
+
+            /*
+            Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/main.webp").build();
+            NetworkImageView imageView = (NetworkImageView) findViewById(R.id.image_header);//ImageView)cv.findViewById(R.id.card_image);
+            //imageView.setTag(cv);
+
+            ImageLoader loader= RequestQueueSingleton.getInstance(imageView.getContext()).getImageLoader();
+            imageView.setImageUrl(imagePath.toString(), loader);
+            */
+
+
+            /*
+            WebView webView = (WebView)findViewById(R.id.webView);
+
+
+            mActionBarBackgroundDrawable = getResources().getDrawable(R.drawable.ab_background);
+            mActionBarBackgroundDrawable.setAlpha(0);
+
+            getActionBar().setBackgroundDrawable(mActionBarBackgroundDrawable);
+
+            ((NotifyingScrollView) findViewById(R.id.scroll_view)).setOnScrollChangedListener(mOnScrollChangedListener);
+            */
         }
+
+
 
     }
 
+    private NotifyingScrollView.OnScrollChangedListener mOnScrollChangedListener = new NotifyingScrollView.OnScrollChangedListener() {
+        public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
+            final int headerHeight = findViewById(R.id.image_header).getHeight() - getActionBar().getHeight();
+            final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
+            final int newAlpha = (int) (ratio * 255);
+            mActionBarBackgroundDrawable.setAlpha(newAlpha);
+        }
+    };
+
     public void preparePage()
     {
-        final View view = getLayoutInflater().inflate(R.layout.activity_game, null);
-        WebView webView = (WebView)view.findViewById(R.id.game_info);
-        webView.loadData(game.getDescription(), "text/html", null);
+        //final View view = getLayoutInflater().inflate(R.layout.activity_home, null);
+        //WebView webView = (WebView)findViewById(R.id.game_info);
+        //webView.loadData(game.getDescription(), "text/html", null);
         queue = RequestQueueSingleton.getInstance(this).getRequestQueue();
-        Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/main.webp").build();
         streamPath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.STREAM_PORT).appendEncodedPath("app/"+game.getId()+"/launch").build();
-        ImageRequest imageRequest = new ImageRequest(imagePath.toString(), new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-                ((ImageView) view.findViewById(R.id.game_image)).setImageBitmap(response);
-            }
-        }, 0, 0, ImageView.ScaleType.CENTER_CROP, null, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
-            }
-        });
-        queue.add(imageRequest);
+
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this cool demo for "+game.getName()+": "+streamPath.toString());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this cool demo for " + game.getName() + ": " + streamPath.toString());
         shareIntent.setType("text/plain");
         setShareActionProvider(shareIntent);
-        buildPage(view);
+
+        //buildPage(view);
     }
 
     private void buildPage(View view)
     {
         setContentView(view);
-        ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
+        //((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_game, menu);
+        /*
         MenuItem shareItem = menu.findItem(R.id.action_share);
         Log.d("Menu: ","Menu Inflated");
         shareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
@@ -120,6 +167,7 @@ public class GameActivity extends Activity {
         shareIntent.setType("text/plain");
         setShareActionProvider(shareIntent);
         Log.d("Share: ", shareActionProvider.toString());
+        */
         return true;
     }
 
