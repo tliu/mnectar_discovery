@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 22
@@ -27,4 +28,5 @@ dependencies {
     compile files('libs/json-20140107.jar')
     compile project(':volley')
     compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.google.android.gms:play-services:7.5+'
 }
