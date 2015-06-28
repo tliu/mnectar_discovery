@@ -35,6 +35,7 @@ public class GameActivity extends Activity {
     private RequestQueue queue;
     private ShareActionProvider shareActionProvider;
     private Uri streamPath;
+    private User user;
 
     public void setGame(Game game) {
         this.game = game;
@@ -48,6 +49,7 @@ public class GameActivity extends Activity {
         //setContentView(R.layout.activity_game);
         Intent intent= getIntent();
         String action = intent.getAction();
+        user = User.getUser();
         if (action.equals(Intent.ACTION_VIEW)) {
             Uri uri = intent.getData();
             String id = uri.getPath();

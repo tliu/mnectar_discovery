@@ -9,12 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.Network;
 import com.android.volley.toolbox.NetworkImageView;
 import com.mnectar.mnectardisc.backend.GetCategoriesTask;
 import com.mnectar.mnectardisc.backend.URLUtil;
@@ -25,12 +23,15 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     List<Category> categories;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new GetCategoriesTask(this).execute();
+        user = User.getUser();
+        ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
     }
 
     public void setCategories(List<Category> categories) {
