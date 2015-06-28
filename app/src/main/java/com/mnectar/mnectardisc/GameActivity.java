@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -82,16 +83,26 @@ public class GameActivity extends Activity {
             FadingActionBarHelper helper = new FadingActionBarHelper()
                     .actionBarBackground(R.drawable.ab_background)
                     .headerLayout(R.layout.header_light)
-                    .contentLayout(R.layout.activity_scrollview);
+                    .contentLayout(R.layout.activity_scrollview)
+                    .allowHeaderTouchEvents(true);
             setContentView(helper.createView(this));
             helper.initActionBar(this);
 
-            ImageView imageView = (ImageView)findViewById(R.id.image_header);
-            Log.i("HEIGHT", ""+imageView.getHeight());
+            ImageView imageView = (ImageView)findViewById(R.id.image_logo);
+            imageView.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/logo" + game.getId(), null, null)));
+
+            TextView textView = (TextView)findViewById(R.id.details_title);
+            textView.setText(game.getName());
 
             WebView webView = (WebView) findViewById(R.id.webView);
+            webView.getSettings().setStandardFontFamily("Georgia");
+            webView.getSettings().setSerifFontFamily("Georgia");
+            webView.getSettings().setSansSerifFontFamily("Georgia");
             webView.setWebViewClient(new WebViewClient());
             webView.loadData(game.getDescription(), "text/html", null);
+
+            ImageView i = (ImageView) findViewById(R.id.image_header);
+            i.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/main" + game.getId(), null, null)));
 
             /*
             Uri imagePath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.IMAGE_PORT).appendEncodedPath("assets/"+game.getId()+"/main.webp").build();
@@ -134,7 +145,6 @@ public class GameActivity extends Activity {
         //final View view = getLayoutInflater().inflate(R.layout.activity_home, null);
         //WebView webView = (WebView)findViewById(R.id.game_info);
         //webView.loadData(game.getDescription(), "text/html", null);
-        queue = RequestQueueSingleton.getInstance(this).getRequestQueue();
         streamPath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.STREAM_PORT).appendEncodedPath("app/"+game.getId()+"/launch").build();
 
 
@@ -157,7 +167,6 @@ public class GameActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_game, menu);
-        /*
         MenuItem shareItem = menu.findItem(R.id.action_share);
         Log.d("Menu: ","Menu Inflated");
         shareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
@@ -167,7 +176,6 @@ public class GameActivity extends Activity {
         shareIntent.setType("text/plain");
         setShareActionProvider(shareIntent);
         Log.d("Share: ", shareActionProvider.toString());
-        */
         return true;
     }
 

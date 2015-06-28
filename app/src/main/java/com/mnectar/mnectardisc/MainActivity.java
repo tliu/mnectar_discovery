@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.mnectar.mnectardisc.backend.GetCategoriesTask;
 import com.mnectar.mnectardisc.backend.URLUtil;
 
 import java.util.List;
+import java.util.Random;
 
 
 public class MainActivity extends Activity {
@@ -114,10 +116,16 @@ public class MainActivity extends Activity {
         LinearLayout layout = (LinearLayout) findViewById(R.id.category_list);
         for (Category c : categories)
         {
-            RelativeLayout categoryLayout = (RelativeLayout) getLayoutInflater().inflate(R.layout.game_list, layout, false);
+                RelativeLayout categoryLayout =(RelativeLayout) getLayoutInflater().inflate(R.layout.game_list, layout, false);
             TextView title= (TextView) categoryLayout.findViewById(R.id.category_title);
             title.setText(c.getName());
             LinearLayout games = (LinearLayout) categoryLayout.findViewById(R.id.game_list);
+            Random r = new Random();
+            Game g = c.getGames().get(r.nextInt(c.getGames().size()));
+
+            ImageView img = (ImageView)findViewById(R.id.main_image);
+            img.setImageDrawable(getResources().getDrawable(getResources().getIdentifier("com.mnectar.mnectardisc:drawable/main" + g.getId(), null, null)));
+
             games.removeAllViews();
             populateList(c, games);
             layout.addView(categoryLayout);

@@ -1,83 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="100dp" android:layout_height="match_parent"
-        android:gravity="start"
-        android:background="@android:color/holo_green_dark">
+    android:background="#81D5FA"
+    android:paddingTop="16dp"
+    android:gravity="center">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/coins"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentBottom="true">
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:id="@+id/coin_image"
                 android:layout_alignParentEnd="true"
                 android:scaleType="fitCenter"
-                android:paddingTop="5dp"
+                android:paddingBottom="3dp"
                 android:src="@drawable/coin"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/coin_count"
                 android:textSize="24sp"
+                android:textColor="#fff"
+                android:shadowColor="#000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
                 android:layout_toStartOf="@id/coin_image" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/coins"
             android:id="@+id/reward_button">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rewards"
+                android:id="@+id/reward_text"
+                android:textColor="#fff"
+                android:gravity="center_horizontal"
+                android:shadowColor="#000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:textSize="18sp" />
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:src="@drawable/reward_icon"
+                android:layout_below="@id/reward_text"
                 android:id="@+id/reward_icon"
                 android:scaleType="fitCenter"
                 android:onClick="goToRewards"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/reward_icon"
-                android:text="Rewards"
-                android:textSize="24sp"/>
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/reward_button"
             android:id="@+id/main_page">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Main"
+                android:id="@+id/main_text"
+                android:textColor="#fff"
+                android:shadowColor="#000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"/>
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:src="@drawable/main_page_icon"
                 android:id="@+id/main_page_icon"
+                android:layout_below="@id/main_text"
                 android:scaleType="fitCenter"
                 android:onClick="goToMain"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/main_page_icon"
-                android:text="Main"
-                android:textSize="24sp"/>
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/main_page"
             android:id="@+id/settings">
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:id="@+id/settings_text"
+                android:textColor="#fff"
+                  android:shadowColor="#000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"/>
             <ImageView
+
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:src="@drawable/features_icon"
                 android:id="@+id/settings_icon"
+                android:layout_below="@id/settings_text"
                 android:scaleType="fitCenter"
                 android:onClick="goToSettings"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/settings_icon"
-                android:text="Settings"
-                android:textSize="24sp"/>
+
         </RelativeLayout>
     </RelativeLayout>

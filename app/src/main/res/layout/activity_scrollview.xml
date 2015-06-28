@@ -1,50 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/windowBackground"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:background="#ffffffff"
+
         >
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="10.0dp">
+            <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/image_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo"
+                android:cropToPadding="false"
+                android:elevation="10dp" />
+        </android.support.v7.widget.CardView>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical" >
 
-    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/image_header"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:layout_margin="15dp"
-        android:src="@drawable/logo"
-        android:cropToPadding="false"
-        android:elevation="5dp" />
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?android:attr/windowBackground"
-    android:orientation="vertical" >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Hearthstone, mother fucker"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/details_title"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="Hearthstone, mother fucker"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.ActionMode.Title"
+                android:textAlignment="center" />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="Install"
-        android:textColor="#fff"
-        android:textAppearance="@android:style/TextAppearance.Holo.Widget.Button"
-        android:background="#b4c837"/>
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Install"
+                android:textColor="#fff"
+                android:textAppearance="@android:style/TextAppearance.Holo.Widget.Button"
+                android:background="#b4c837"/>
 
-</LinearLayout>
+        </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#aaaaaa" />
     <WebView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="25dp"
         android:id="@+id/webView"/>
 
 
 </LinearLayout>
+
