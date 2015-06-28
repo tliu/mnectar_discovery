@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -225,7 +226,10 @@ public class GameActivity extends Activity {
             public void onFinish() {
                 user.addCoins(game.getCoins());
                 preparePage();
-
+                getActionBar().show();
+                if (user.getCoins() >= 100) {
+                    Toast.makeText(getApplicationContext(), "You have enough coins for a reward! Check out the rewards page!", Toast.LENGTH_LONG).show();
+                }
             }
 
         };

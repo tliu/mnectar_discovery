@@ -215,7 +215,13 @@ public class MainActivity extends Activity {
     }
 
     public void goToSettings(View view) {
-
+        Random r = new Random();
+        Category c = categories.get(r.nextInt(categories.size()));
+        Game g = c.getGames().get(r.nextInt(c.getGames().size()));
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(getString(R.string.game), g);
+        intent.setAction("showGame");
+        startActivity(intent);
     }
 
     public void goToMain(View view) {

@@ -56,6 +56,7 @@ public class MNectarGcmListenerService extends GcmListenerService {
                         .setContentText(message);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, GameActivity.class);
+        resultIntent.setAction(Intent.ACTION_VIEW);
         Uri streamPath = new Uri.Builder().scheme("http").encodedAuthority(URLUtil.SERVER_IP+URLUtil.STREAM_PORT).appendEncodedPath("app/"+id+"/launch").build();
         resultIntent.setData(streamPath);
 // The stack builder object will contain an artificial back stack for the
