@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ShareActionProvider;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -103,6 +104,7 @@ public class GameActivity extends Activity {
     private void buildPage(View view)
     {
         setContentView(view);
+        ((TextView)findViewById(R.id.coin_count)).setText(String.valueOf(user.getCoins()));
     }
 
     @Override

@@ -1,22 +1,35 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mnectar.mnectardisc.GameActivity">
-    <LinearLayout
+    tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/game_image"
-            android:contentDescription="@string/game_image_desc"
-            android:background="@android:color/holo_purple"
-            android:onClick="launchStream"/>
-        <WebView
+        android:layout_height="match_parent"
+        tools:context="com.mnectar.mnectardisc.GameActivity">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/game_info" />
-    </LinearLayout>
-</ScrollView>
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/game_image"
+                android:contentDescription="@string/game_image_desc"
+                android:background="@android:color/holo_purple"
+                android:onClick="launchStream"/>
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/game_info" />
+        </LinearLayout>
+    </ScrollView>
+    <include layout="@layout/navigation_drawer"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navigation_drawer"/>
+</android.support.v4.widget.DrawerLayout>

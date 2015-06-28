@@ -16,7 +16,7 @@ public class Game implements Serializable{
     private float rating;
     private String description;
     private Uri link;
-    private int coins;
+    private int coins=10;
 
     public Game(String name, String id, Uri link) {
         this.name = name;
