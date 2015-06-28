@@ -153,7 +153,7 @@ public class GameActivity extends Activity {
         //stream.addJavascriptInterface(StreamJavascriptInterpreter);
         stream.loadUrl(streamPath.toString());
         stream.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        stream.setPadding(0,0,0,0);
+        stream.setPadding(0, 0, 0, 0);
 
         stream.setInitialScale(getScale());
         setContentView(stream);
@@ -187,4 +187,17 @@ public class GameActivity extends Activity {
             super(context);
         }
     }
+    public void goToSettings(View view) {
+
+    }
+
+    public void goToMain(View view) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);    }
+
+    public void goToRewards(View view) {
+        Intent intent = new Intent(this,RewardsActivity.class);
+        startActivity(intent);
+    }
+
 }

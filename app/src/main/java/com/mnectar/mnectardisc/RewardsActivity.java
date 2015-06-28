@@ -7,10 +7,12 @@ import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -59,10 +61,16 @@ public class RewardsActivity extends Activity {
         intent = packageManager.getLaunchIntentForPackage("com.spotify.music");
         if (intent != null)
         {
-            //do something to make sure the reward is activated
-            user.removeCoins(100);
-            startActivity(intent);
-        }
+            if (user.getCoins()>=100) {
+                //do something to make sure the reward is activated
+                user.removeCoins(100);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast toast = Toast.makeText(this, "Not Enough Coins", Toast.LENGTH_LONG);
+                toast.show();
+            }        }
         else
         {
             String uri="market://details?id=com.spotify.music";
@@ -84,9 +92,16 @@ public class RewardsActivity extends Activity {
         intent = packageManager.getLaunchIntentForPackage("com.pandora.android");
         if (intent!=null)
         {
-            //do something to make sure the reward is activated
-            user.removeCoins(100);
-            startActivity(intent);
+            if (user.getCoins()>=100) {
+                //do something to make sure the reward is activated
+                user.removeCoins(100);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast toast = Toast.makeText(this, "Not Enough Coins", Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
         else
         {
@@ -96,5 +111,17 @@ public class RewardsActivity extends Activity {
             startActivity(intent);
             //change intent to get app from play store don't remove coins yet?
         }
+    }
+    public void goToSettings(View view) {
+
+    }
+
+    public void goToMain(View view) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToRewards(View view) {
+
     }
 }
