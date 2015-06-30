@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class GetCategoriesTask extends AsyncTask<Void, Void, List<Category>> {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
+        Collections.shuffle(cats);
         return cats;
     }
 
